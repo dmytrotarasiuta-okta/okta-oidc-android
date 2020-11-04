@@ -104,6 +104,10 @@ public class OktaAuthenticationActivity extends Activity implements ServiceConne
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mCustomTabOptions != null && mCustomTabOptions.getStartEnterResId() != 0
+                && mCustomTabOptions.getStartExitResId() != 0) {
+            overridePendingTransition(mCustomTabOptions.getStartEnterResId(), mCustomTabOptions.getStartExitResId());
+        }
         Bundle bundle;
         if (savedInstanceState == null) {
             bundle = getIntent().getExtras();
@@ -289,6 +293,10 @@ public class OktaAuthenticationActivity extends Activity implements ServiceConne
             mResultSent = true;
             setResult(rc, intent);
             finish();
+            if (mCustomTabOptions != null && mCustomTabOptions.getEndEnterResId() != 0
+                    && mCustomTabOptions.getEndExitResId() != 0) {
+                overridePendingTransition(mCustomTabOptions.getEndEnterResId(), mCustomTabOptions.getEndExitResId());
+            }
         }
     }
 
